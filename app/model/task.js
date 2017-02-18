@@ -22,14 +22,10 @@ TaskSchema.pre('remove', function(next) {
   // to be notified of the calls' result.
   // can be moved to batch remove
   T = mongoose.model('List');
-  console.log("this");
-  console.log(this);
   parentId = this._id;
   ls = T.findById(this.list).exec(function(err, lax){
     lax.tasks.pull(parentId);
-    console.log(lax.tasks);
     lax.save();
-    console.log(lax.tasks);
   });
   next();
 });
